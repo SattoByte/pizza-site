@@ -27,7 +27,12 @@ function App() {
                 // image={item.imageUrl}
                 // price={item.price}
                 // sizes={item.sizes}
-                // types={item.types}
+                // types={item.types} 
+
+                // if we don't change key names or manipulate them,
+                //and using same keys names in othe components, 
+                //we can use spread operator !!! make code shorter; lines 26 - 30
+
                 />
               ))}
             </div>

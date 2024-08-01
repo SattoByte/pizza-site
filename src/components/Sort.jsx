@@ -1,6 +1,13 @@
 import React from 'react'
 
 const Sort = () => {
+  const popupMenu = ["Popular", "Price", "Name"]
+
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [chosedValue, setChosedValue] = React.useState(0);
+  let sortName = popupMenu[chosedValue];
+  //remember and repeat arr[state=>(index)] (line 8);
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -17,17 +24,30 @@ const Sort = () => {
           />
         </svg>
         <b>Sort by:</b>
-        <span>Popular</span>
+        <span onClick={() => { setIsVisible(!isVisible) }}>{sortName}</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">Popular</li>
-          <li>Price</li>
-          <li>Name</li>
-        </ul>
-      </div>
+      {isVisible && (//remember and repeat toggle popup menu
+        //manipulate with rendering popup menu hide/show
+        <div className="sort__popup">
+          <ul>
+            {popupMenu.map((item, idx) => (
+              <li
+                key={idx}
+                onClick={() => {
+                  setChosedValue(idx);
+                  setIsVisible(false);
+                }}
+                className={chosedValue === idx ? 'active' : ''} //remember and repeat
+              //compairing state value with index of .map and set 'active' to className
+
+              >{item}</li>
+            ))}
+
+          </ul>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
 export default Sort

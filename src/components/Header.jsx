@@ -2,6 +2,7 @@ import React from 'react'
 import Logo from '../assets/img/pizza-logo.svg'
 
 const Header = () => {
+
   return (
     <div className="header">
       <div className="container">

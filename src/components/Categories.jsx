@@ -1,15 +1,18 @@
 import React from 'react'
 
+const categoriesBtn = ['All', 'With Meat', 'Vegeterian', 'Grill', 'Spicy', 'Закрытые'];
+
+
 const Categories = () => {
+
+  const [activeCat, setActiveCat] = React.useState(0);
+
   return (
     <div className="categories">
       <ul>
-        <li className="active">All</li>
-        <li>With Meat</li>
-        <li>Vegeterian</li>
-        <li>Grill</li>
-        <li>Spicy</li>
-        <li>Закрытые</li>
+        {categoriesBtn.map((item, idx) => (
+          <li onClick={() => { setActiveCat(idx) }} className={activeCat === idx ? 'active' : ''}>{item}</li>
+        ))}
       </ul>
     </div>
   )

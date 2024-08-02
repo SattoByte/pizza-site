@@ -1,6 +1,6 @@
 import React from 'react'
 
-const categoriesBtn = ['All', 'With Meat', 'Vegeterian', 'Grill', 'Spicy', 'Закрытые'];
+const categoriesBtn = ['All', 'With Meat', 'Vegeterian', 'Grill', 'Spicy'];
 
 
 const Categories = () => {

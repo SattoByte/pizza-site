@@ -4,7 +4,7 @@ const PizzaBlock = ({ imageUrl, title, price, sizes, id, types }) => {
 
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
-  const typeNames = ['тонкое', 'традиционное'];
+  const typeNames = ['Thick', 'Tradidional'];
 
   return (
     <div className="pizza-block">
@@ -18,7 +18,7 @@ const PizzaBlock = ({ imageUrl, title, price, sizes, id, types }) => {
         </ul>
         <ul>
           {sizes.map((size, i) => (
-            <li onClick={() => { setActiveSize(i) }} className={activeSize === i ? 'active' : ''} >{size}</li>
+            <li onClick={() => { setActiveSize(i) }} className={activeSize === i ? 'active' : ''} >{size}"</li>
           ))}
         </ul>
       </div>
@@ -37,8 +37,8 @@ const PizzaBlock = ({ imageUrl, title, price, sizes, id, types }) => {
               fill="white"
             />
           </svg>
-          <span>Добавить</span>
-          <i>2</i>
+          <span>Add to Cart</span>
+          <i>0</i>
         </div>
       </div>
     </div>

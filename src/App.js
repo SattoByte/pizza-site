@@ -1,13 +1,15 @@
+import React from 'react'
 import './scss/app.scss';
+import { Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header';
-import Categories from './components/Categories';
-import Sort from './components/Sort';
-import PizzaBlock from './components/PizzaBlock';
-import pizzas from './pizzas.json'
-
+import Home from './pages/Home';
+import Cart from './pages/Card'
+import NotFound from './pages/NotFound';
 
 function App() {
+
+  const pathName = window.location.pathname;
 
   return (
     <>
@@ -15,27 +17,11 @@ function App() {
         <Header />
         <div className="content">
           <div className="container">
-            <div className="content__top">
-              <Categories />
-              <Sort />
-            </div>
-            <h2 className="content__title">Pizza menu:</h2 >
-            <div className="content__items">
-              {pizzas.map((item, index) => (
-                <PizzaBlock {...item}
-                // title={item.title}
-                // image={item.imageUrl}
-                // price={item.price}
-                // sizes={item.sizes}
-                // types={item.types} 
-
-                // if we don't change key names or manipulate them,
-                //and using same keys names in othe components, 
-                //we can use spread operator !!! make code shorter; lines 26 - 30
-
-                />
-              ))}
-            </div>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/cart' element={<Cart />} />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
           </div>
         </div>
       </div>

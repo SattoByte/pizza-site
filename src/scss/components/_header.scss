@@ -5,9 +5,12 @@
   padding: 40px 0;
 
   .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
   }
 
   &__logo {
@@ -22,11 +25,11 @@
       font-size: 24px;
       letter-spacing: 1%;
       text-transform: uppercase;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     p {
-      color: #7b7b7b;
+      color: #3b3b3b;
     }
   }
 }

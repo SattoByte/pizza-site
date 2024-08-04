@@ -4,12 +4,25 @@
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
 
+
   .container {
+    display: flex;
+    justify-content: space-between;
+
     a {
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      @media (max-width: 470px) {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 20px;
+        /* align-items: center; */
+        justify-content: center;
+      }
     }
+
 
   }
 

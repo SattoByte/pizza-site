@@ -3,18 +3,21 @@ import './scss/app.scss';
 import { Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header';
+
 import Home from './pages/Home';
 import Cart from './pages/Card'
 import NotFound from './pages/NotFound';
 
-function App() {
+export const SearchContext = React.createContext('');
 
-  const pathName = window.location.pathname;
+function App() {
+  const [searchValue, setSearchValue] = React.useState('');
 
   return (
-    <>
-      <div className="wrapper">
-        <Header />
+
+    <div className="wrapper">
+      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+        <Header searchValue={searchValue} setSearchValue={setSearchValue} />
         <div className="content">
           <div className="container">
             <Routes>
@@ -24,8 +27,8 @@ function App() {
             </Routes>
           </div>
         </div>
-      </div>
-    </>
+      </SearchContext.Provider>
+    </div>
   );
 }
 

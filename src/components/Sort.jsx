@@ -1,12 +1,13 @@
 import React from 'react'
 
-const Sort = () => {
-  const popupMenu = ["Popular", "Price", "Name"]
+const Sort = ({ value, onChangeSort }) => {
 
   const [isVisible, setIsVisible] = React.useState(false);
-  const [chosedValue, setChosedValue] = React.useState(0);
-  let sortName = popupMenu[chosedValue];
-  //remember and repeat arr[state=>(index)] (line 8);
+  const popupMenu = [
+    { name: "Popular", sortProperty: "rating" },
+    { name: "Price", sortProperty: "price" },
+    { name: "Name", sortProperty: "title" },
+  ]
 
   return (
     <div className="sort">
@@ -24,23 +25,21 @@ const Sort = () => {
           />
         </svg>
         <b>Sort by:</b>
-        <span onClick={() => { setIsVisible(!isVisible) }}>{sortName}</span>
+        <span onClick={() => { setIsVisible(!isVisible) }}>{value.name}</span>
       </div>
       {isVisible && (//remember and repeat toggle popup menu
         //manipulate with rendering popup menu hide/show
         <div className="sort__popup">
           <ul>
-            {popupMenu.map((item, idx) => (
+            {popupMenu.map((obj, i) => (
               <li
-                key={idx}
+                key={i}
                 onClick={() => {
-                  setChosedValue(idx);
-                  setIsVisible(false);
+                  onChangeSort(obj); setIsVisible(false); console.log(obj)
                 }}
-                className={chosedValue === idx ? 'active' : ''} //remember and repeat
-              //compairing state value with index of .map and set 'active' to className
-
-              >{item}</li>
+                className={value.sortProperty === obj.sortProperty ? 'active' : ''}>
+                {obj.name}
+              </li>
             ))}
 
           </ul>

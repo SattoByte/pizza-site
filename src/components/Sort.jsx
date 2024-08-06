@@ -1,13 +1,24 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { setSort } from '../redux//slices/filterSlice.js'
 
-const Sort = ({ value, onChangeSort }) => {
+const popupMenu = [
+  { name: "Popular", sortProperty: "rating" },
+  { name: "Price", sortProperty: "price" },
+  { name: "Name", sortProperty: "title" },
+];
+
+const Sort = () => {
+  const dispatch = useDispatch();
+  const sort = useSelector((state) => state.filter.sort);
 
   const [isVisible, setIsVisible] = React.useState(false);
-  const popupMenu = [
-    { name: "Popular", sortProperty: "rating" },
-    { name: "Price", sortProperty: "price" },
-    { name: "Name", sortProperty: "title" },
-  ]
+
+
+  const onCLickListItem = (obj) => {
+    setIsVisible(false);
+    dispatch(setSort(obj))
+  }
 
   return (
     <div className="sort">
@@ -25,7 +36,7 @@ const Sort = ({ value, onChangeSort }) => {
           />
         </svg>
         <b>Sort by:</b>
-        <span onClick={() => { setIsVisible(!isVisible) }}>{value.name}</span>
+        <span onClick={() => { setIsVisible(!isVisible) }}>{sort.name}</span>
       </div>
       {isVisible && (//remember and repeat toggle popup menu
         //manipulate with rendering popup menu hide/show
@@ -35,9 +46,9 @@ const Sort = ({ value, onChangeSort }) => {
               <li
                 key={i}
                 onClick={() => {
-                  onChangeSort(obj); setIsVisible(false); console.log(obj)
+                  onCLickListItem(obj)
                 }}
-                className={value.sortProperty === obj.sortProperty ? 'active' : ''}>
+                className={sort.sortProperty === obj.sortProperty ? 'active' : ''}>
                 {obj.name}
               </li>
             ))}

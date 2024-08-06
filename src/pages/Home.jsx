@@ -1,23 +1,28 @@
 import React from 'react';
 import { SearchContext } from '../App';
+import { useSelector, useDispatch } from 'react-redux'
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
+import { setCategoryId } from '../redux/slices/filterSlice';
 
 const URL = `https://66a9d064613eced4eba64a7f.mockapi.io/items?`;
 
 const Home = () => {
-  const { searchValue } = React.useContext(SearchContext)
+  const dispatch = useDispatch();
+  const categoryId = useSelector(state => state.filter.categoryId);
+  const sortType = useSelector(state => state.filter.sort.sortProperty);
 
+  const onChangeCategory = (id) => {
+    dispatch(setCategoryId(id))
+  }
+
+  const { searchValue } = React.useContext(SearchContext)
   const [pizzas, setPizzas] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [categoryId, setCategoryId] = React.useState(0);
-  const [sortType, setSortType] = React.useState({
-    name: 'Popular',
-    sortProperty: 'rating'
-  });
+  // const [categoryId, setCategoryId] = React.useState(0);
 
   React.useEffect(() => {
     setIsLoading(true)
@@ -35,8 +40,8 @@ const Home = () => {
 
     <>
       <div className="content__top">
-        <Categories value={categoryId} onChangeCategory={(i) => setCategoryId(i)} />
-        <Sort value={sortType} onChangeSort={(i) => setSortType(i)} />
+        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
+        <Sort />
       </div>
 
       <h2 className="content__title">Pizza menu:</h2 >
@@ -45,19 +50,6 @@ const Home = () => {
         {isLoading ? [...new Array(10)].map((_, index) => <Skeleton key={index} />) : pizzas
           .filter((itemName) => itemName.title.toLowerCase().includes(searchValue.toLowerCase()) ? true : false)
           .map((item) => <PizzaBlock key={item.id} {...item} />)}
-        {/* {pizzas.map((item, index) => (isLoading ? <Skeleton key={index} /> : <PizzaBlock key={item.id} {...item}
-              // title={item.title}
-              // image={item.imageUrl}
-              // price={item.price}
-              // sizes={item.sizes}
-              // types={item.types} 
-
-              // if we don't change key names or manipulate them,
-              //and using same keys names in other components, 
-              //we can use spread operator !!! make code shorter; lines 26 - 30
-
-              />
-              ))} */}
       </div>
     </>
 

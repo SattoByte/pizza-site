@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../redux//slices/filterSlice.js'
 
@@ -19,6 +19,7 @@ const Sort = () => {
     setIsVisible(false);
     dispatch(setSort(obj))
   }
+
 
   return (
     <div className="sort">
